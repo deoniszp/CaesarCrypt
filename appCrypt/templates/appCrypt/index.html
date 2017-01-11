@@ -1,0 +1,93 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Author" content="Krol_Denis">
+    <title>Шифр Цезаря (python/django 2017)</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    {% csrf_token %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-5 col-sm-7 col-xs-9">
+                <a href="/" title="На главную"><img id="logo" class="center-block" src="{% static 'img/logo.png' %}" alt="Шифр Цезаря"/></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="description">
+                <p><b>Шифр Цезаря</b>, также известный как шифр сдвига, код Цезаря или сдвиг Цезаря — один из самых простых и наиболее широко известных методов шифрования.
+                   Шифр Цезаря — это вид шифра подстановки, в котором каждый символ в открытом тексте заменяется символом, находящимся на некотором постоянном числе
+                   позиций левее или правее него в алфавите.</p>
+                <p>В данном WEB-приложении шифруются/дешифруются <i><b>только буквы английского</b></i> алфавита. Все остальные символы удаляются как и лишние пробелы.</p>
+            </div>
+        </div>
+        <div class="row content">
+            <div class="col-lg-5 col-md-5 col-sm-4">
+                <div class="block">
+                    <textarea name="inpText" class="form-control" autofocus tabindex="0" placeholder="Входящие данные" title="Введите текст на английском"></textarea>
+                    <div class="dropup">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownTexts" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="true" title="Загрузите готовый текст из базы">
+                            Выберите текст
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownTexts">
+                            {% for text in data.text_list %}
+                            <li><button class="btn btn-link form-control loadtext" value="{{ text.id }}">{{ text.title }}</button></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-4">
+                <div class="form-group">
+                    <label for="inpShift" class="control-label">Введите сдвиг:</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-chevron-right" aria-hidden="true"></i></span>
+                        <input name="inpShift" class="form-control" type="number" tabindex="1" value="1" placeholder="Сдвиг" title="Введите сдвиг">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary form-control runcrypt" type="default" tabindex="2" value="encode_msg">Шифровать</button>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary form-control runcrypt" type="default" tabindex="3"  value="decode_msg">Расшифровать</button>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" name="shift" type="text" readonly title="Вероятный сдвиг (в тексте должно быть минимум 10 разных букв)">
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-4">
+                <div class="block">
+                    <textarea name="outText" class="form-control" tabindex="4" placeholder="Результаты..." readonly title="Результат"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="block" id="graph-container">
+                <p>Частотная диаграмма для заданного текста, которая отображает частоту каждого символа в тексте:</p>
+                <canvas id="results-graph"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+
+  </body>
+</html>

@@ -1,0 +1,40 @@
+body {
+    background-color: #9d9d9d;
+    background-image: url("../img/background.png");
+    margin-top: 10px;
+}
+.container {
+    background: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Параметры тени */
+    padding: 10px;
+}
+
+#logo{
+    margin: 20px;
+    vertical-align: middle;
+}
+
+div.dropdown {
+    padding-bottom: 5px;
+}
+
+.row.content, #graph-container{
+    padding: 15px;
+}
+
+.block textarea{
+    resize: none;
+    height: 210px;
+    margin-bottom: 10px;
+}
+
+.description {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+p {
+    text-align: justify;
+    text-indent: 25px;
+}
