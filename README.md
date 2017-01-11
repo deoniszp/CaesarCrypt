@@ -12,6 +12,10 @@
 ```
 http://localhost:8000/admin/ login: admin password: admin123
 ```
+Так же есть тест на проверку шифрования/дешифрования, запустить можно с помощью команды:
+```
+manage.py test - для Windows и python manage.py test для Linux
+```
 
 ##### Как запустить проект:
 
